@@ -21,7 +21,7 @@ class SignIn extends Component {
 
 		return (
 			<form onSubmit={this._onSignIn} className="form-signin">
-				{ this.props.errorMsg !== '' ? <Message text={this.props.errorMsg} /> : null }
+				{ this.props.errorMsg !== '' ? <Message text={this.props.errorMsg} cssClass="danger" /> : null }
 				<div className="card">					
 					<div className="card-header">
 						<h3>Login</h3>

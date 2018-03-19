@@ -20,7 +20,7 @@ class Register extends Component {
 		const { email, password } = this.state;
 		return (
 			<form onSubmit={this._onSignUp} className="form-signin">
-				{ this.props.errorMsg !== '' ? <Message text={this.props.errorMsg} /> : null }
+				{ this.props.errorMsg !== '' ? <Message text={this.props.errorMsg} cssClass="danger" /> : null }
 				<div className="card">					
 					<div className="card-header">
 						<h3>Register</h3>

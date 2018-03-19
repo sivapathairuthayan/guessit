@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+
+import store from './store';
 
 import Header from './components/header';
 import Footer from './components/footer';
@@ -20,7 +22,7 @@ class Routes extends Component {
 							<Route path={"/signin"} component={SignIn} />
 							<Route path={"/signout"} component={SignOut} />
 							<Route path={"/register"} component={Register} />
-							<Route path={"/guessit"} component={GuessIt} />				
+							<PrivateRoute path={"/guessit"} component={GuessIt} />				
 						</Switch>					
 					</main>
 					<Footer />
@@ -29,5 +31,26 @@ class Routes extends Component {
 		)
 	}
 }
+
+console.log("store.getState().sessionReducer.loggedIn : ", store.getState().sessionReducer.loggedIn )
+
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      store.getState().sessionReducer.loggedIn ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/",
+            state: { from: props.location }
+          }}
+        />
+      )
+    }
+  />
+);
 
 export default Routes;

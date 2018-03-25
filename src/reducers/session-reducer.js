@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, SIGN_IN_FAILED, REGISTER, REGISTER_FAILED } from '../constants/session-constants';
+import { SIGN_IN, SIGN_OUT, SIGN_IN_FAILED, REGISTER, REGISTER_FAILED, UPDATE_AUTH_INFO } from '../constants/session-constants';
 
 const initState = {
 	loggedIn: false,	
@@ -9,7 +9,8 @@ const initState = {
 function sessionReducer(state = initState, action) {	
 	const payload = action.payload;
 	switch(action.type) {
-		case SIGN_IN:			
+		case SIGN_IN:
+		case UPDATE_AUTH_INFO:
 			return { ...state, loggedIn: payload.loggedIn, email: payload.email, errorMsg: '' };
 		case SIGN_OUT:			
 			return { ...state, loggedIn: false, email: false, errorMsg: '' };

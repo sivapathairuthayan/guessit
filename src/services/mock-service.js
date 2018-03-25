@@ -68,9 +68,9 @@ function addUser(email, password) {
 }
 
 function logTheGuess(email, guess, callBack) {
-	const guessArr = localStorage.getItem('gusess') ? JSON.parse(localStorage.getItem('gusess')) : [];	
+	const guessArr = sessionStorage.getItem('gusess') ? JSON.parse(sessionStorage.getItem('gusess')) : [];	
 	guessArr.push(guess);
-	localStorage.setItem('gusess', JSON.stringify(guessArr));
+	sessionStorage.setItem('gusess', JSON.stringify(guessArr));
 
 	if (callBack) {
 		callBack({
@@ -82,7 +82,7 @@ function logTheGuess(email, guess, callBack) {
 }
 
 function getGuessLog(email, callBack) {
-	const guess = JSON.parse(localStorage.getItem(email)) || [];	
+	const guess = JSON.parse(sessionStorage.getItem(email)) || [];	
 
 	if (callBack) {		
 		callBack({

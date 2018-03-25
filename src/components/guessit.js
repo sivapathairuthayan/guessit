@@ -87,6 +87,7 @@ class GuessIt extends Component {
 		}
 
 		if ((guessTimes +1) >= MAX_ATTEMPTS && wrongGuess) {
+			sessionStorage.setItem('triesExpired', true);
 			clearGuessLog(this.props.dispatch);
 			this.props.history.push('/signout');
 			return ;

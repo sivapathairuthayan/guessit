@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { updateAuthInfo } from '../actions/session-actions';
 
 class Header extends Component {
+	componentWillMount() {
+		updateAuthInfo(this.props.dispatch);
+	}
+
 	render() {
+		console.log("this.props: ", this.props);
 		return (
 			<header>
 				<nav className="navbar navbar-dark bg-dark">

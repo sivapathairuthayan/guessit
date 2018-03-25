@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, SIGN_IN_FAILED, REGISTER, REGISTER_FAILED } from '../constants/session-constants';
+import { SIGN_IN, SIGN_OUT, SIGN_IN_FAILED, REGISTER, REGISTER_FAILED, UPDATE_AUTH_INFO } from '../constants/session-constants';
 import makeRequest from '../services/mock-service';
 
 export function signIn({ email, password }, history) {
@@ -12,6 +12,9 @@ export function signIn({ email, password }, history) {
 						email: email
 					}
 				});
+				sessionStorage.setItem('loggedIn', true);
+				sessionStorage.setItem('email', email);
+				sessionStorage.removeItem('triesExpired');
 				history.push('/guessit');
 			} else {
 				dispatch({
@@ -34,6 +37,8 @@ export function register({ email, password }, history) {
 						email: email
 					}
 				});
+				sessionStorage.setItem('loggedIn', true);
+				sessionStorage.setItem('email', email);
 				history.push('/guessit');
 			} else {
 				dispatch({
@@ -47,6 +52,18 @@ export function register({ email, password }, history) {
 
 export function signOut(dispatch) {
 	dispatch({type: SIGN_OUT});
+}
+
+export function updateAuthInfo(dispatch) {
+	if (sessionStorage.getItem('loggedIn') && sessionStorage.getItem('email')) {
+		dispatch({
+			type: UPDATE_AUTH_INFO, 
+			payload: {
+				email: sessionStorage.getItem('email'),
+				loggedIn: sessionStorage.getItem('loggedIn'),
+			}
+		});
+	}
 }
 
 /*
